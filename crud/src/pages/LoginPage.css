@@ -8,7 +8,7 @@
   padding: 20px;
 }
 
-/* White login box */
+/* Glassmorphism login box */
 .login-box {
   background:rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
@@ -30,12 +30,13 @@
 .login-header h1 {
   font-size: 28px;
   font-weight: bold;
-  color: #1a202c;
+  color: #ffffff;
   margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .login-header p {
-  color: #718096;
+  color: #f0f0f0;
   margin: 0;
   font-size: 14px;
 }
@@ -120,7 +121,7 @@
 }
 
 .login-footer p {
-  color: #718096;
+  color: #c4c7cd;
   font-size: 14px;
   margin: 12px 0 0 0;
 }
@@ -129,7 +130,7 @@
 .link-button {
   background: none;
   border: none;
-  color: #667eea;
+  color: #e1e3eb;
   cursor: pointer;
   font-size: 14px;
   padding: 0;

@@ -92,3 +92,20 @@ Thumbs.db
 
 # Local development
 *.local
+
+
+.env                 # Secret keys, API tokens, passwords
+.env.local          # Local environment variables
+
+
+
+npm-debug.log*      # Error logs
+.DS_Store           # Mac OS system files
+Thumbs.db           # Windows system files
+.vscode/            # VS Code settings (optional)
+.idea/              # IntelliJ/WebStorm settings
+
+
+/coverage           # Test coverage reports
+.eslintcache        # Linting cache
+*.log               # All log files
