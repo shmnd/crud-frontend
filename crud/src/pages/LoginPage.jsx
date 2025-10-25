@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import './LoginPage.css';
+import './SignupPage.css';
+import SignUpPage from "./SignupPage";
+import { Link } from 'react-router-dom';
 
 function LoginPage() {
   // STATE: React remembers these values
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -13,17 +15,12 @@ function LoginPage() {
     setError(''); // Clear previous errors
     
     // Validation
-    if (!email || !password) {
+    if ( !password || !username ) {
       setError('Please fill in all fields');
       return;
     }
     
-    if (!email.includes('@')) {
-      setError('Please enter a valid email');
-      return;
-    }
-    
-    if (password.length < 6) {
+    if (password.length < 8) {
       setError('Password must be at least 6 characters');
       return;
     }
@@ -33,21 +30,48 @@ function LoginPage() {
     
     try {
       // TODO: Replace with your actual backend API call
-      // const response = await fetch('http://your-backend-url/login', {
+      // const response = await fetch('http://127.0.0.1:8000/api/users/users/create-or-update-user', {
       //   method: 'POST',
       //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email, password })
+      //   body: JSON.stringify({ email, 
+      //     password, 
+      //     username, 
+      //     phone_number: phoneNumber, 
+      //     name 
+      //   })
       // });
+
+
+      // const data = await response.json();
+
+      // if (data.status === false && data.errors) {
+      //   const errorMessage = [];
+        
+      //   for (const field in data.errors){
+      //     const fieldError = data.errors[field];
+      //     errorMessage.push(...fieldError);
+      //   }
+      //   setError(errorMessage.join(', '));
+      //   return;
+      // }
       
+
+      // if (data.status === true ){
+      //   alert('Login Successfull');
+      //   console.log('Response',data);
+        
+      //   setUsername("");
+      //   setPassword("");
+      // }
+
+
       // Fake delay to simulate network request
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      alert('Login successful! ✓');
-      console.log('Email:', email);
-      console.log('Password:', password);
+      // await new Promise(resolve => setTimeout(resolve, 1500));
+
       
     } catch (err) {
       setError('Login failed. Please try again.');
+      console.error('Error:',err)
     } finally {
       setIsLoading(false);
     }
@@ -59,21 +83,20 @@ function LoginPage() {
         
         {/* Header */}
         <div className="login-header">
-          <h1>Welcome Back</h1>
-          <p>Sign in to your account</p>
+          <h1>Login to your account</h1>
         </div>
         
         {/* Form Inputs */}
         <div className="login-form">
-          
-          {/* Email Input */}
+
+
           <div className="input-group">
-            <label>Email Address</label>
+            <label>Username</label>
             <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="jhon12"
               className="input-field"
             />
           </div>
@@ -103,7 +126,7 @@ function LoginPage() {
             disabled={isLoading}
             className="login-button"
           >
-            {isLoading ? 'Signing in...' : 'Sign In'}
+            {isLoading ? 'Loging...' : 'Login'}
           </button>
         </div>
         
@@ -111,8 +134,10 @@ function LoginPage() {
         <div className="login-footer">
           <button className="link-button">Forgot password?</button>
           <p>
-            Don't have an account?{' '}
-            <button className="link-button signup-link">Sign up</button>
+            Create have an account? {SignUpPage}
+            <Link to="/signup" className="link-button signup-link">
+              Signup
+            </Link>
           </p>
         </div>
         
