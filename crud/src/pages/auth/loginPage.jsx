@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './SignupPage.css';
 import SignUpPage from "./SignupPage";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   // STATE: React remembers these values
@@ -9,6 +10,8 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate()
 
   // FUNCTION: Handles form submission
   const handleLogin = async () => {
@@ -27,10 +30,13 @@ function LoginPage() {
     
     // Simulate API call
     setIsLoading(true);
+
     
     try {
       // TODO: Replace with your actual backend API call
-      const response = await fetch('http://127.0.0.1:8000/api/auth/authentication/login', {
+      console.log('API Base URL:', process.env.REACT_APP_API_BASE_URL);
+
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/auth/authentication/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -55,11 +61,13 @@ function LoginPage() {
       
 
       if (data.status === true ){
-        alert('Login Successfull');
-        console.log('Response',data);
         
         setUsername("");
         setPassword("");
+
+        setTimeout(()=>{
+          navigate('/home')
+        })
       }
 
 

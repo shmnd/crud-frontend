@@ -44,7 +44,7 @@ function SignUpPage() {
     
     try {
       // TODO: Replace with your actual backend API call
-      const response = await fetch('http://127.0.0.1:8000/api/auth/authentication/create-or-update-user', {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/auth/authentication/create-or-update-user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, 
