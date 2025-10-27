@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import './SignupPage.css';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 function SignUpPage() {
   // STATE: React remembers these values
@@ -12,6 +11,8 @@ function SignUpPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate()
 
   // FUNCTION: Handles form submission
   const handleSignup = async () => {
@@ -43,7 +44,7 @@ function SignUpPage() {
     
     try {
       // TODO: Replace with your actual backend API call
-      const response = await fetch('http://127.0.0.1:8000/api/users/users/create-or-update-user', {
+      const response = await fetch('http://127.0.0.1:8000/api/auth/authentication/create-or-update-user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, 
@@ -70,14 +71,18 @@ function SignUpPage() {
       
 
       if (data.status === true ){
-        alert('Signup Successfull');
-        console.log('Response',data);
+        // alert('Signup Successfull');
+        // console.log('Response',data);
         
         setName("");
         setEmail("");
         setUsername("");
         setPassword("");
         setPhoneNumber("");
+
+        setTimeout(()=>{
+          navigate('/login');
+        });
       }
 
 
