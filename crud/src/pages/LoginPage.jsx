@@ -30,39 +30,37 @@ function LoginPage() {
     
     try {
       // TODO: Replace with your actual backend API call
-      // const response = await fetch('http://127.0.0.1:8000/api/users/users/create-or-update-user', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email, 
-      //     password, 
-      //     username, 
-      //     phone_number: phoneNumber, 
-      //     name 
-      //   })
-      // });
+      const response = await fetch('http://127.0.0.1:8000/api/auth/authentication/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          username, 
+          password, 
+        })
+      });
 
 
-      // const data = await response.json();
+      const data = await response.json();
 
-      // if (data.status === false && data.errors) {
-      //   const errorMessage = [];
+      if (data.status === false && data.errors) {
+        const errorMessage = [];
         
-      //   for (const field in data.errors){
-      //     const fieldError = data.errors[field];
-      //     errorMessage.push(...fieldError);
-      //   }
-      //   setError(errorMessage.join(', '));
-      //   return;
-      // }
+        for (const field in data.errors){
+          const fieldError = data.errors[field];
+          errorMessage.push(...fieldError);
+        }
+        setError(errorMessage.join(', '));
+        return;
+      }
       
 
-      // if (data.status === true ){
-      //   alert('Login Successfull');
-      //   console.log('Response',data);
+      if (data.status === true ){
+        alert('Login Successfull');
+        console.log('Response',data);
         
-      //   setUsername("");
-      //   setPassword("");
-      // }
+        setUsername("");
+        setPassword("");
+      }
 
 
       // Fake delay to simulate network request
