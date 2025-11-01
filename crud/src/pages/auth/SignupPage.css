@@ -186,3 +186,46 @@ a.link-button:hover {
   text-decoration: underline;
   color: #e0e0e0;
 }
+
+
+/* Password input wrapper for positioning the eye icon */
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-input-wrapper .input-field {
+  width: 100%;
+  padding-right: 45px; /* Make space for the eye icon */
+}
+
+/* Eye icon toggle button */
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5568d3;
+  transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+  color: #5568d3;
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+  color: #5568d3;
+}
+
+.password-toggle-btn svg {
+  width: 20px;
+  height: 20px;
+}
