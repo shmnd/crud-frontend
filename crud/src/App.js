@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route, Navigate }  from 'react-router-dom';
 import SignUpPage from "./pages/auth/SignupPage";
 import LoginPage from "./pages/auth/loginPage";
 import Homepage from './pages/home/homePage';
-import LogoutButton from './components/LogoutButton';
 import ProtectedRoute from './components/ProtectedRoute';
 
 
@@ -19,6 +18,8 @@ function App() {
           </ProtectedRoute>
           }
         />
+        
+    
 
       </Routes>
     </BrowserRouter>
