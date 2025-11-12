@@ -65,8 +65,8 @@ function LoginPage() {
       if (data.status === true ){
 
         // Store tokens in cookies
-        setCookie('access_token', data.data.access, 0.0021); // 5 minutes
-        setCookie('refresh_token', data.data.refresh, 1); // 1 day
+        setCookie('access_token', data.data.access, 5/(24*60)); // 5 minutes
+        setCookie('refresh_token', data.data.refresh, 91); // 91 day
         
         // Optional: Store user info in localStorage
         localStorage.setItem('user', JSON.stringify(data.data.user));
