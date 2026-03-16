@@ -12,28 +12,28 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
- const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate()
 
   // FUNCTION: Handles form submission
   const handleLogin = async () => {
     setError(''); // Clear previous errors
-    
+
     // Validation
-    if ( !password || !username ) {
+    if (!password || !username) {
       setError('Please fill in all fields');
       return;
     }
-    
+
     if (password.length < 8) {
       setError('Password must be at least 6 characters');
       return;
     }
-    
+
     // Simulate API call
     setIsLoading(true);
 
-    
+
     try {
       // TODO: Replace with your actual backend API call
       console.log('API Base URL:', process.env.REACT_APP_API_BASE_URL);
@@ -41,9 +41,9 @@ function LoginPage() {
       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/auth/authentication/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          username, 
-          password, 
+        body: JSON.stringify({
+          username,
+          password,
         })
       });
 
@@ -52,29 +52,29 @@ function LoginPage() {
 
       if (data.status === false && data.errors) {
         const errorMessage = [];
-        
-        for (const field in data.errors){
+
+        for (const field in data.errors) {
           const fieldError = data.errors[field];
           errorMessage.push(...fieldError);
         }
         setError(errorMessage.join(', '));
         return;
       }
-      
 
-      if (data.status === true ){
+
+      if (data.status === true) {
 
         // Store tokens in cookies
-        setCookie('access_token', data.data.access, 5/(24*60)); // 5 minutes
+        setCookie('access_token', data.data.access, 5 / (24 * 60)); // 5 minutes
         setCookie('refresh_token', data.data.refresh, 91); // 91 day
-        
+
         // Optional: Store user info in localStorage
         localStorage.setItem('user', JSON.stringify(data.data.user));
-        
+
         setUsername("");
         setPassword("");
 
-        setTimeout(()=>{
+        setTimeout(() => {
           navigate('/home')
         })
       }
@@ -83,10 +83,10 @@ function LoginPage() {
       // Fake delay to simulate network request
       // await new Promise(resolve => setTimeout(resolve, 1500));
 
-      
+
     } catch (err) {
       setError('Login failed. Please try again.');
-      console.error('Error:',err)
+      console.error('Error:', err)
     } finally {
       setIsLoading(false);
     }
@@ -95,12 +95,12 @@ function LoginPage() {
   return (
     <div className="login-container">
       <div className="login-box">
-        
+
         {/* Header */}
         <div className="login-header">
           <h1>Login to your account</h1>
         </div>
-        
+
         {/* Form Inputs */}
         <div className="login-form">
 
@@ -114,7 +114,7 @@ function LoginPage() {
               className="input-field"
             />
           </div>
-          
+
           {/* Password Input */}
           <div className="input-group">
             <label>Password</label>
@@ -148,14 +148,14 @@ function LoginPage() {
               </button>
             </div>
           </div>
-          
+
           {/* Error Message */}
           {error && (
             <div className="error-message">
               {error}
             </div>
           )}
-          
+
           {/* Submit Button */}
           <button
             onClick={handleLogin}
@@ -165,7 +165,7 @@ function LoginPage() {
             {isLoading ? 'Loging...' : 'Login'}
           </button>
         </div>
-        
+
         {/* Footer Links */}
         <div className="login-footer">
           <button className="link-button">Forgot password?</button>
@@ -176,7 +176,7 @@ function LoginPage() {
             </Link>
           </p>
         </div>
-        
+
       </div>
     </div>
   );

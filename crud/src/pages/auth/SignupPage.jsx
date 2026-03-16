@@ -48,7 +48,8 @@ function SignUpPage() {
       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/auth/authentication/create-or-update-user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, 
+        body: JSON.stringify({
+          email,
           password,
           username,
           phone_number: phoneNumber,
@@ -62,7 +63,7 @@ function SignUpPage() {
       if (data.status === false && data.errors) {
         const errorMessage = [];
 
-        for (const field in data.errors){
+        for (const field in data.errors) {
           const fieldError = data.errors[field];
           errorMessage.push(...fieldError);
         }
@@ -71,7 +72,7 @@ function SignUpPage() {
       }
 
 
-      if (data.status === true ){
+      if (data.status === true) {
         // alert('Signup Successfull');
         // console.log('Response',data);
 
@@ -81,7 +82,7 @@ function SignUpPage() {
         setPassword("");
         setPhoneNumber("");
 
-        setTimeout(()=>{
+        setTimeout(() => {
           navigate('/login');
         });
       }
@@ -101,7 +102,7 @@ function SignUpPage() {
 
     } catch (err) {
       setError('Signup failed. Please try again.');
-      console.error('Error:',err)
+      console.error('Error:', err)
     } finally {
       setIsLoading(false);
     }
